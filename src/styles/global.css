@@ -1,9 +1,9 @@
 @import "tailwindcss";
-@tailwind components;
-@tailwind utilities;
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 html {
-  overflow-y: scroll;
+  overflow-y: auto;
   color-scheme: light;
 }
 

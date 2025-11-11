@@ -10,7 +10,7 @@ import lora400 from "@fontsource/lora/files/lora-latin-400-normal.woff2";
 import lora600 from "@fontsource/lora/files/lora-latin-600-normal.woff2";
 
 import { ClientRouter } from "astro:transitions";
-import { SITE } from "@consts"
+import { SITE } from "@consts";
 
 interface Props {
     title: string;
@@ -63,6 +63,7 @@ const { title, description } = Astro.props;
     href={new URL("rss.xml", Astro.site)}
 />
 
+<!-- disable font preloads on page change -->
 <script>
     import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
     document.addEventListener("astro:before-swap", (e) =>
@@ -72,4 +73,80 @@ const { title, description } = Astro.props;
             ).newDocument.head.querySelectorAll('link[as="font"]'),
         ].forEach((link) => link.remove()),
     );
+</script>
+
+<!-- theme handler -->
+<script is:inline>
+    function setTheme(theme) {
+        const css = document.createElement("style");
+        css.appendChild(
+            document.createTextNode(`* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `),
+        );
+
+        document.head.appendChild(css);
+
+        if (theme === "dark") {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+
+        window.getComputedStyle(css).opacity;
+        document.head.removeChild(css);
+    }
+
+    function animate() {
+        const animateElements = document.querySelectorAll(".animate");
+
+        animateElements.forEach((element, index) => {
+            setTimeout(() => {
+                element.classList.add("show");
+            }, index * 150);
+        });
+    }
+
+    function runThemeButton() {
+        const toggleThemeButton = document.getElementById("toggleThemeButton");
+
+        toggleThemeButton?.addEventListener("click", () => {
+            const currentTheme = document.documentElement.classList.contains(
+                "dark",
+            )
+                ? "dark"
+                : "light";
+
+            const requiredTheme = currentTheme === "dark" ? "light" : "dark";
+
+            localStorage.setItem("theme", requiredTheme);
+            setTheme(requiredTheme);
+        });
+    }
+
+    function preloadTheme() {
+        const userTheme = localStorage.theme;
+
+        if (userTheme === "light" || userTheme === "dark") {
+            setTheme(userTheme);
+        } else {
+            const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            setTheme(systemPrefersDark ? "dark" : "light");
+        }
+    }
+
+    function init(){
+        preloadTheme()
+        runThemeButton()
+        animate()
+    }
+
+    preloadTheme();
+    document.addEventListener("DOMContentLoaded", () => init());
+    document.addEventListener("astro:after-swap", () => init());
 </script>
