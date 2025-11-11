@@ -3,7 +3,7 @@ export type Site = {
   EMAIL: string;
 };
 
-export type Home = {
+export type Page = {
   TITLE: string;
   DESCRIPTION: string;
 };

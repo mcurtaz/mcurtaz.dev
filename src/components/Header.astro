@@ -1,0 +1,17 @@
+---
+import Link from "@components/Link.astro";
+import { SITE } from "@consts";
+import Container from "./Container.astro";
+---
+
+<header>
+    <Container>
+        <div class="flex flex-wrap gap-y-2 gap-x-4 justify-end">
+            <nav class="flex gap-3">
+                <Link underline={false} href="/about"> About </Link>
+                <Link underline={false} href="/blog"> Blog </Link>
+            </nav>
+            <div>Button</div>
+        </div>
+    </Container>
+</header>
