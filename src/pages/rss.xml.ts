@@ -1,5 +1,5 @@
 import rss from "@astrojs/rss";
-import { HOME } from "@consts";
+import { SITE } from "@consts";
 
 type Context = {
   site: string
@@ -7,8 +7,8 @@ type Context = {
 
 export async function GET(context: Context) {
   return rss({
-    title: HOME.TITLE,
-    description: HOME.DESCRIPTION,
+    title: SITE.TITLE,
+    description: SITE.DESCRIPTION,
     site: context.site,
     items: [],
   });

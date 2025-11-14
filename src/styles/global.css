@@ -2,6 +2,11 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
+  --font-sans: 'Inter', 'sans-serif';
+  --font-serif: 'Lora', 'sans-serif';
+}
+
 html {
   overflow-y: auto;
   color-scheme: light;
@@ -17,7 +22,7 @@ body {
 }
 
 body {
-  @apply font-sans antialiased;
+  @apply font-serif antialiased;
   @apply flex flex-col;
   @apply bg-stone-100 dark:bg-stone-900;
   @apply text-black/50 dark:text-white/75;
