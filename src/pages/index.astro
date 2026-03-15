@@ -1,0 +1,18 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import { SITE } from "@consts";
+---
+
+<PageLayout title={SITE.TITLE} description={SITE.DESCRIPTION}>
+	<Container>
+		<div class="animate">
+			<p>My name is Michele Curtaz, I'm a back end developer with a strong passion for Cloud and DevOps and this is my personal garden on the internet.</p>
+			<p>Some posts are in Italian, some are in English based on my needs, goal and motivation at the time of writing. Everything on this site is written by me, not AI. although I did use some AI to check my english or some technical details.</p>
+			<br>
+			<p>
+				Please feel free to get in touch <a href="mailto:mcurtaz@gmail.com">mcurtaz[at]gmail.com</a>
+			</p>
+		</div>
+	</Container>
+</PageLayout>

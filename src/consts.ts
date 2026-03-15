@@ -6,13 +6,3 @@ export const SITE: Site = {
   TITLE: "mcurtaz.dev",
   DESCRIPTION: "My personal blog"
 };
-
-export const ABOUT: Page = {
-  TITLE: "About",
-  DESCRIPTION: "About me"
-};
-
-export const BLOG: Page = {
-  TITLE: "Blog",
-  DESCRIPTION: "My personal blog"
-};
