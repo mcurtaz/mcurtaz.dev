@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import FormattedDate from "@components/FormattedDate.astro";
 
 type Props = {
   entry: CollectionEntry<"blog">;
@@ -8,19 +9,20 @@ type Props = {
 const { entry } = Astro.props;
 ---
 
-<a href={`/${entry.collection}/${entry.slug}`} class="relative group flex flex-nowrap py-3 px-4 pr-10 rounded-lg border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
-  <div class="flex flex-col flex-1 truncate">
-    <div class="font-semibold flex items-center gap-2">
-      {entry.data.title}
+<a href={`/${entry.collection}/${entry.id}`} class="relative group flex flex-nowrap py-3 px-4 pr-10 rounded-lg border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
+  <div class="flex flex-col flex-1 truncate gap-0.5">
+    <div class="flex items-center gap-1 text-xs text-black/50 dark:text-white/50">
+      <FormattedDate date={entry.data.date} lang={entry.data.language} />
+      <span>-</span>
       {"language" in entry.data && (
-        <span class="text-xs font-mono uppercase px-1 py-0.5 rounded border border-black/20 dark:border-white/30 text-black/50 dark:text-white/50">
+        <span class="font-mono uppercase">
           {entry.data.language}
         </span>
       )}
     </div>
-    <!-- <div class="text-sm">
-      {entry.data.description}
-    </div> -->
+    <div class="font-semibold truncate">
+      {entry.data.title}
+    </div>
   </div>
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
