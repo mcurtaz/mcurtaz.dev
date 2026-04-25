@@ -1,0 +1,30 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import ArrowCard from "@components/ArrowCard.astro";
+import { SITE } from "@consts";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+const latestPost = posts[0];
+---
+
+<PageLayout title={SITE.TITLE} description={SITE.DESCRIPTION}>
+	<Container>
+		<div class="animate">
+			<h1>Hi, I'm Michele</h1>
+			<p>I'm a software developer with a strong passion for Cloud and DevOps and this is my personal garden on the internet.</p>
+			<p>
+				Please feel free to get in touch <a href="mailto:mcurtaz@gmail.com">mcurtaz[at]gmail.com</a>
+			</p>
+		</div>
+		{latestPost && (
+			<div class="animate mt-8 space-y-4">
+				<h2 class="font-semibold text-black dark:text-white">Latest Post</h2>
+				<ArrowCard entry={latestPost} />
+			</div>
+		)}
+	</Container>
+</PageLayout>
