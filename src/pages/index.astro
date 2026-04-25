@@ -1,0 +1,24 @@
+---
+---
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      const lang = navigator.language?.toLowerCase() || 'en';
+
+      const supported = ['en', 'it'];
+
+      let locale = lang.split('-')[0]; 
+
+      if (!supported.includes(locale)) {
+        locale = 'en'; 
+      }
+
+      window.location.replace(`/${locale}/about`);
+    </script>
+
+    <!-- fallback if JS is disabled -->
+    <meta http-equiv="refresh" content="0; url=/en/about">
+  </head>
+</html>

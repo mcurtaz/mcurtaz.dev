@@ -1,15 +1,22 @@
 ---
 import Link from "@components/Link.astro";
-import { SITE } from "@consts";
-import Container from "./Container.astro";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import Container from "@components/Container.astro";
+
+import { getLangFromUrl, useTranslations } from '@i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const aboutURL = getRelativeLocaleUrl(Astro.currentLocale ?? "en", "about");
+const blogURL = getRelativeLocaleUrl(Astro.currentLocale ?? "en", "blog");
 ---
 
 <header>
     <Container>
         <div class="flex flex-wrap gap-y-2 gap-x-6 justify-end items-center">
             <nav class="flex gap-4">
-                <Link href="/about"> About </Link>
-                <Link href="/blog"> Blog </Link>
+                <Link href={aboutURL}> {t('nav.about')} </Link>
+                <Link href={blogURL}> {t('nav.blog')} </Link>
             </nav>
             <button
                 id="toggleThemeButton"
